@@ -1,0 +1,71 @@
+{
+  "name": "lua-format",
+  "displayName": "lua-format",
+  "description": "Only beautify your code (indentation, spacing, alignment), your code lines will not be increased or decreased.",
+  "version": "1.1.1",
+  "publisher": "fox",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:lua"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "lua-format",
+        "properties": {
+          "lua-format.indentSize": {
+            "type": "number",
+            "default": 4,
+            "description": "Indent size for formatting."
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "1.80.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
+    "esbuild": "^0.27.2",
+    "eslint": "^9.39.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
+  },
+  "dependencies": {
+    "lua_styles": "^1.1.1"
+  },
+  "vsce": {
+    "baseImagesUrl": "https://my.custom/base/images/url",
+    "dependencies": true,
+    "yarn": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imfox/lua_format.git"
+  },
+  "icon": "images/icon.png"
+}
